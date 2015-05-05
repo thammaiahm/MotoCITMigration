@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+
+<style>
+.colour {
+	background-color: #e0ffff;
+}
+</style>
+
+</head>
+
+<body>
+
+	<form name="recipeGenerationForm" onsubmit="return validateForm()">
+		<table width="100%">
+			<tr>
+				<td width="25%" valign="top"></td>
+				<td width="75%" valign="top">
+					<table width="100%" border="0">
+						<tr>
+							<td height="99">
+								<h3 align="left">Recipe Generation</h3> 
+								<table>
+									<tr>
+										<td><input type="hidden" id="associationFlag"
+											name="associationFlag"
+											value="" /> <input
+											type="hidden" id="selectedXmlFileName"
+											name="selectedXmlFileName" /> <input type="hidden"
+											id="overWriteRecipeXmlId" name="overWriteRecipeXmlId" /> <select
+											id="selectedRecipeXmlId" name="selectedRecipeXmlId"
+											style="width: 200px;">
+												<option value="Select">Select</option>
+												<% for(var i=0; i<item.length; i++) {%>
+  												 <option><%= item[i].NAME %></option>
+												 <% } %></select></td>
+										<td><input style="width: 100px;" type="button"
+											name="LoadButton" id="LoadButton" value="Load"/></td>
+										<td><strong>OR</strong></td>
+										<td><input style="width: 100px;" type="button"
+											name="newButton" id="newButton" value="New"/></td>
+									</tr>
+								</table> <br> <br>
+								<table class="CBHeader" width="100%" border="1" cellpadding="0"
+									cellspacing="0">
+									<tr>
+										<td valign="top">
+									<tr bgColor=#cccccc>
+										<td width="57%" height=32 colspan="3" align="left"><strong> Recipe Details:	</strong></td>
+									</tr>
+									<tr bgcolor="#cccccc">
+										<td>Please select the appropriate Check Boxes to generate Recipe.</td>
+									</tr>
+									<table cellSpacing=0 cellPadding=4 width="100%" border=0>
+
+										<tr bgColor=#cccccc>
+											<td width="57%" height=32>
+												<!-- <span id="RecpAdd" > --> <!-- <div style="height:400px;width:1200px;overflow:auto;"> -->
+												<table width="100%" id="tableId" border="1" cellpadding="0"
+													cellspacing="0">
+													<thead>
+														<tr bgColor=#cccccc>
+															<th height="34" align="center"><strong>Sno</strong></th>
+
+															<th align="center"><strong>Test Cases </strong></th>
+
+															<th align="center"><input type="checkbox"
+																class="allCB" /> <strong> FrontEnd</strong></th>
+
+															<th align="center"><input type="checkbox"
+																class="allCB" />BackEnd<strong> 
+															</strong></th>
+
+															<th align="center"><input type="checkbox"
+																class="allCB" /> <strong>No Complaint Provided
+															</strong></th>
+
+															<th align="center"><input type="checkbox"
+																class="allCB" /> <strong>Audio/Alert </strong></th>
+
+															<th align="center"><input type="checkbox"
+																class="allCB" /> <strong>Battery </strong></th>
+
+															<th align="center"><input type="checkbox"
+																class="allCB" /> <strong>Bluetooth </strong></th>
+
+															<th align="center"><input type="checkbox"
+																class="allCB" /> <strong>Camera </strong></th>
+
+															<th align="center"><input type="checkbox"
+																class="allCB" /> <strong>Charging </strong></th>
+
+															<th align="center"><input type="checkbox"
+																class="allCB" /><strong>Display/Keypad </strong></th>
+
+															<th align="center"><input type="checkbox"
+																class="allCB" /> <strong>Memory Card </strong></th>
+
+															<th align="center"><input type="checkbox"
+																class="allCB" /> <strong>Power On/Off </strong></th>
+
+															<th align="center"><input type="checkbox"
+																class="allCB" /> <strong>SIM Card </strong></th>
+
+															<th align="center"><input type="checkbox"
+																class="allCB" /> <strong>Wifi </strong></th>
+
+															<th align="center"><strong>Delete </strong></th>
+														</tr>
+													</thead>
+													<%var name =testCaseName.split(",")%>
+													<% for(var i=0; i<name.length; i++) {%>
+													<tr bgColor=#cccccc>
+														<td height="34" align="center"><%= i+1 %></td>
+
+														<td align="center"><%= name[i] %></td>
+
+														<td align="center"><input type="checkbox"
+															class="allCB" /> <strong> </strong></td>
+
+														<td align="center"><input type="checkbox"
+															class="allCB" /> <strong> </strong></td>
+
+														<td align="center"><input type="checkbox"
+															class="allCB" /> <strong> </strong></td>
+
+														<td align="center"><input type="checkbox"
+															class="allCB" /> <strong> </strong></td>
+
+														<td align="center"><input type="checkbox"
+															class="allCB" /> <strong> </strong></td>
+
+														<td align="center"><input type="checkbox"
+															class="allCB" /> <strong></strong></td>
+
+														<td align="center"><input type="checkbox"
+															class="allCB" /> <strong> </strong></td>
+
+														<td align="center"><input type="checkbox"
+															class="allCB" /> <strong> </strong></td>
+
+														<td align="center"><input type="checkbox"
+															class="allCB" /><strong> </strong></td>
+
+														<td align="center"><input type="checkbox"
+															class="allCB" /> <strong></strong></td>
+
+														<td align="center"><input type="checkbox"
+															class="allCB" /> <strong> </strong></td>
+
+														<td align="center"><input type="checkbox"
+															class="allCB" /> <strong> </strong></td>
+
+														<td align="center"><input type="checkbox"
+															class="allCB" /> <strong></strong></td>
+
+														<td align="center"><input type="button" name="delete" value="delete">
+														<strong> </strong></td>
+
+
+
+													</tr>
+
+
+													<% } %> 
+												</table>
+													
+											</table>
+											</td>
+										</tr>
+										<tr bgColor="#ffffff">
+											<td align="center"><input style="width: 100px;"
+												type="button" name="moveUp" id="moveUp" value="MoveUp"
+												class="Up" /><br /> <input style="width: 100px;"
+												type="button" name="moveDown" id="moveDown" value="MoveDown"
+												class="Down" /></td>
+										</tr>
+
+									</table>
+								</table>
+
+								<table>
+									<tr>
+										<td><strong><font style="color: red;">*</font>File
+												Name:</strong></strong></td>
+										<td><input style="width: 200px;" type="text"
+											name="recipeFileName" id="recipeFileName" /></td>
+										<td><input type="submit" value="Submit" /></td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table></td>
+			</tr>
+		</table>
+		
+		
+	</form>
+</body>
+</html>
