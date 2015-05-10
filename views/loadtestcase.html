@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Loading Test Case</title>
+</head>
+<body>
+<form method="post" enctype="multipart/form-data" action="/uploadtestcase">
+<table width="100%" border="0">
+<tr>
+    <td colspan="2" bgcolor="#b5dcb3">
+      <p><h4>Motorola</h4></p> 
+    </td>
+</tr>
+
+<tr valign="top">
+<td bgcolor="#aaa" width="50">
+<b>Options</b>
+<br />
+<br />
+<a href="">Load Supported Test Cases</a> <br />
+      <a href="">Json File Management</a> <br />
+      <a href="">Motoservice Marketname Association</a> <br />
+      <a href="">Recipe Generation</a> <br />
+      <a href="">Recipe Assignment</a> <br />
+      <a href="">View Associations/Mappings</a> <br /><br />
+      <a href="">Home</a> <br />
+      <a href="">Exit RSD</a> <br />
+</td>
+
+<td bgcolor="#eee" width="100" height="200">
+<p><h2> Load Supported Test Cases</h2></p>
+
+<p> Select the text file (**) :
+<input type="file" name="upload">
+</p>
+
+<br></br>
+<br></br>
+
+<p>
+
+<input type="submit" >
+   <input type="button" name="Reset" value="Reset">
+</p>
+</td>      
+</tr>
+
+<tr>
+    <td colspan="2" bgcolor="#b5dcb3">
+      <center>
+       <p>
+            ** Dear User, Please make sure you are following the below instructions:
+            <br>
+            	a. Select only flat text(.txt) file. No ZIP/gz/tar files are allowed.
+            	<br>
+            	b. Parameters must be separated by comma.
+            	<br> 
+            	<!-- c. The first parameter of each line must be the CIT Market name of the phone model.
+            	 <br> -->
+            	c. The length of the each line or record must be less than 4000 characters.
+            
+            </p>
+      </center>
+    </td>
+  </tr>
+</table>
+</form>
+</body>
+</html>
