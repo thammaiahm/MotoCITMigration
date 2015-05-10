@@ -8,8 +8,16 @@
   "dependencies": {
 	    "express": "3.2.6",
 	    "jade": "*",
-	    "ejs" : "*",
-	    "mongodb":"*",
-	    "mongoose": "*"
+	    "ejs": "*",
+	    "connect-multiparty": "*",
+	    "multiparty": "*",
+	    "fs": "*",
+	    "util": "*",
+	    "multipart": "*",
+	    "node-uuid": "*",
+	    "fileupload": "*",
+	    "mongoose": "*",
+	    "http": "*",
+	    "mongodb":"*"
 	  }
 	}
