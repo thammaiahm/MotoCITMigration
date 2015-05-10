@@ -1,5 +1,6 @@
 var mongoose = require('mongoose');
 var MongoClient = require('mongodb').MongoClient;
+var Schema = mongoose.Schema;
 
 exports.showRecipePage = function (req, res) {
 	MongoClient.connect("mongodb://localhost/RecipeGenerationDB", function(err, db) {
@@ -49,20 +50,15 @@ exports.loadTestcases = function (req, res) {
 };
 
 exports.saveRecipe = function(req, res){
-	
-	MongoClient.connect("mongodb://localhost/RecipeGenerationDB", function(err, db) {
-		if(err) { return console.dir(err); }
-		console.log("Connected to db");
-	
-	
 	var form = req.form;
-	console.log("entered save recipe");
-
-	var generatedJsonString = req.query.recipeString;
-	console.log("generateJsonString : " + generatedJsonString);
-	
-	var recipes = JSON.parse(generatedJsonString);
-
+	console.log("form details" +form);
+	mongoose.connect('mongodb://localhost/RecipeGenerationDB', function (err, res) {
+		if (err) { 
+		console.log ('ERROR connecting to: ' + 'mongodb://localhost/RecipeGenerationDB' + '. ' + err);
+		} else {
+		console.log ('Succeeded connected to: ' + 'mongodb://localhost/RecipeGenerationDB');
+		}
+		});
 	
 	// recipexml table insert new recipe file name
 	var RecipeSchema = new Schema({
@@ -82,13 +78,14 @@ exports.saveRecipe = function(req, res){
 
 	});
 
-	var XUser = mongoose.model('MT_RECIPEXML',RecipeSchema);
-			
+	var XUser = mongoose.model('MT_RECIPEXML', RecipeSchema);
+		var recipeFileName =req.query.recipeFileName;
+		console.log("recipeFileName"+ recipeFileName);
 		var xmldoe = new XUser ({
-				ID: '201',
-				FILENAME:req.query.recipeFileName,	
+				ID: '301',
+				FILENAME:recipeFileName,	
 				VERSION: '0',
-				RECIPE_FILE: req.query,//steps details	
+				RECIPE_FILE: 'recipefile.xml',//steps details	
 				EXTRANET_URL: 'https://rsdsecure-test.motorola.com/download/testing12.txt',
 				STATUS: '0',
 				ERROR_MESSAGE: '',
@@ -101,6 +98,16 @@ exports.saveRecipe = function(req, res){
 				});
 
 				xmldoe.save(function (err) {if (err) console.log ('Error on save!')});
+				
+				console.log("entered save recipe");
+
+				var generatedJsonString = req.query.recipeString;
+				console.log("generateJsonString : " + generatedJsonString);
+				
+				var recipes = JSON.parse(generatedJsonString);
+				console.log("recipies"+ recipes);
+				
+
 				
 	// steps table insert the recipes details as each record based on the test cases			
 
@@ -124,7 +131,7 @@ exports.saveRecipe = function(req, res){
 		});
 	
 	var SUser = mongoose.model('MT_RECIPE_STEPS', RecipeStepsSchema);
-			  
+	console.log("req.query.TClength"+ req.query.TClength);		  
 	for(var i=0; i<req.query.TClength; i++)
 	{
 
@@ -149,7 +156,10 @@ exports.saveRecipe = function(req, res){
 
 	stepsdoe.save(function (err) {if (err) console.log ('Error on save!')});
 	
+	
 	}
-	});
+	
+	res.end();
+
 	
 };

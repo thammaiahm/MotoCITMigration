@@ -3,6 +3,7 @@
  */
 var fs = require('fs');
 var mongoose = require('mongoose');
+var MongoClient = require('mongodb').MongoClient;
 var Schema = mongoose.Schema;
 //var RdUser = mongoose.model('Readtext');
 //var RdUser =require('../repository/TestCaseDb');
@@ -13,8 +14,16 @@ exports.showhomepage = function(req, res) {
 };
 
 exports.uploadtestcase = function(req, res) {
+	mongoose.connect('mongodb://localhost/RecipeGenerationDB', function (err, res) {
+		if (err) { 
+		console.log ('ERROR connecting to: ' + 'mongodb://localhost/RecipeGenerationDB' + '. ' + err);
+		} else {
+		console.log ('Succeeded connected to: ' + 'mongodb://localhost/RecipeGenerationDB');
+		}
+		});
+		
 		var form = req.form;
-		// console.log(req.files.upfilename);
+		 console.log(form);
 		console.log(req.files.upload.name);
 		console.log(req.files.upload.path);
 		var fname = req.files.upload.name;
@@ -38,9 +47,9 @@ exports.uploadtestcase = function(req, res) {
 					});
 
 			var RdUser = mongoose.model('mt_testcases', SchemaUser);
-			
+			var i=104;
 			var testdoe = new RdUser({
-				ID : 103,
+				ID : i,
 				NAME : fname,
 				STATUS : 0,
 				CREATED_BY : 'aksha',
@@ -49,6 +58,7 @@ exports.uploadtestcase = function(req, res) {
 				MODIFIED_DATE : new Date('May 04, 1915'),
 				TESTCASE_NAME : data
 			});
+			i++;
 
 			//Saving it to the database.  
 			testdoe.save(function(err) {
@@ -57,7 +67,8 @@ exports.uploadtestcase = function(req, res) {
 			});
 
 			res.render('index');
-		});
+		
+	});
 	};
 
 
