@@ -12,6 +12,8 @@
 <script>
 $(document).ready(function(){
 
+
+//chethana code-------------------------------------------------------------------------------------------*****************----------------------------------------------
 $( document ).on( "click", ".del", function( event ) 
 	{
 		$(this).parent().parent().remove();
@@ -160,47 +162,6 @@ $( document ).on( "click", ".del", function( event )
   		
   	   });//End of post
     });//End of button click
-	
-	//to reload page for new recipe
-	$("#recipeSubmit").click(function(){
-    	location.reload();
-    });
-    
-    $("#newButton").click(function(){
-    	location.reload();
-    });
-    
-	//Change checkbox state of all rows via table header
-	$(".allCB").click(function(event)
-	{
-		
-		//get selected column
-		$column = $(this).closest("th");
-		$columnIndex = $column.index();
-		
-		//get all available rows of the table
-		$rows = $(".deleteRecipe").closest("tr");
-
-		//identify if the checkboxes need to be checked or unchecked.
-		if ( $(this).is(":checked") ) 
-		{
-			$setCheckBox = true;
-		}
-		else
-		{
-			$setCheckBox = false;
-		}
-		
-		//iterate over the remaining rows and change their property with $setCheckBox.
-		if ( $rows.length > 0 )
-		{
-				for( $i=0; $i < $rows.length; $i++ )
-				{			
-					$ele = $( $( $( ".deleteRecipe" ).parent().parent() )[ $i ] ).children(); 
-					$ele.eq($columnIndex).children("input[type=checkbox]").prop("checked", $setCheckBox);
-				}
-		}
-	});	
     
     //Selecting 
     var flag=false;
@@ -335,16 +296,68 @@ $( document ).on( "click", ".del", function( event )
 		   });
     
     
+    
+    //chethana code-------------------------------------------------------------------------------------------*****************----------------------------------------------
+	
+	//to reload page for new recipe
+	
+    $("#recipeSubmit").click(function(){
+    	$('#tableBodyID').append('<p>Recipe Saved successfully</p>')
+    });
+    
+    $("#newButton").click(function(){
+    	location.reload();
+    });
+    
+	//Change checkbox state of all rows via table header
+	$(".allCB").click(function(event)
+	{
+		
+		//get selected column
+		$column = $(this).closest("th");
+		$columnIndex = $column.index();
+		
+		//get all available rows of the table
+		$rows = $(".deleteRecipe").closest("tr");
+
+		//identify if the checkboxes need to be checked or unchecked.
+		if ( $(this).is(":checked") ) 
+		{
+			$setCheckBox = true;
+		}
+		else
+		{
+			$setCheckBox = false;
+		}
+		
+		//iterate over the remaining rows and change their property with $setCheckBox.
+		if ( $rows.length > 0 )
+		{
+				for( $i=0; $i < $rows.length; $i++ )
+				{			
+					$ele = $( $( $( ".deleteRecipe" ).parent().parent() )[ $i ] ).children(); 
+					$ele.eq($columnIndex).children("input[type=checkbox]").prop("checked", $setCheckBox);
+				}
+		}
+	});	
+    
+    
+    
   
+});
+
+$("#newButton").click(function(){
+	    	location.reload();
 });
 
 
 //Convert table data as form input data for form submission
 function createRecipeList()
 {
+
 	//identify rows with selected contents
 	$rows = $(".deleteRecipe").closest("tr").filter(':has(:checkbox:checked)');
-	
+	$tClengthID=0;
 	//iterate over selected rows and generate string of inputs for submission for each row
 	if ( $rows.length > 0 )
 	{
@@ -352,7 +365,8 @@ function createRecipeList()
 		var $i=0;
 			
 		for( $i=0; $i < $rows.length; $i++ )
-		{			
+		{
+						
 			$ele = $( $( $( ".deleteRecipe" ).parent().parent() )[ $i ] ).children();
 			
 
@@ -378,13 +392,14 @@ function createRecipeList()
 			}
 		}
 	}
-		
+	$tClengthID=$i;	
 	$str = $str + "]"
 	
 	alert($str);
 	$generatedJsonString = "<input type='hidden' name='recipeString' id='recipeString' value='" + $str + "' />";
 	
 	$("#generatedRecipeListContainer").html($generatedJsonString);
+	$("#tClengthID").val($tClengthID);
 }
 
 </script>
@@ -395,7 +410,7 @@ function createRecipeList()
 	<%include menu.html %>
 </div>
 <div class = "container">
-	<div id="content"></div>
+	<div id="content"><font color="green"><%=title%></font></div>
 
 	<form name="recipeGenerationForm" method="get" action="/saveRecipe">
 		<table width="100%">
@@ -418,7 +433,7 @@ function createRecipeList()
 											style="width: 200px;">
 												<option value="Select">Select</option>
 												<% for(var i=0; i<item.length; i++) {%>
-  												 <option value=<%= item[i].ID %> ><%= item[i].NAME %></option>
+  												 <option value=<%= item[i].ID %> ><%= item[i].FILENAME %></option>
 												 <% } %></select></td>
 										<td><input style="width: 100px;" type="button"
 											name="LoadButton" id="LoadButton" value="Load" /></td>
@@ -549,9 +564,8 @@ function createRecipeList()
 														<strong> </strong></td>
 													</tr>
 												<% } %> 
-												<% var TClength = name.length %>
-													<% console.log(name.length) %>
-													<input type="hidden" name="TClength" value="<%=TClength%>" >
+												
+													<input type="hidden" name="TClength" id="tClengthID" value="" >
 												</tbody>
 													
 											</table>
@@ -576,7 +590,7 @@ function createRecipeList()
 												Name:</strong></strong></td>
 										<td><input style="width: 200px;" type="text"
 											name="recipeFileName" id="recipeFileName" /></td>
-										<td><input type="submit" name="recipeSubmit" value="Submit" onClick="createRecipeList()"/></td>
+										<td><input type="submit" id="recipeSubmit" value="Submit" onClick="createRecipeList()"/></td>
 									</tr>
 								</table>
 							</td>
