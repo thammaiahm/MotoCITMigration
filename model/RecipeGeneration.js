@@ -91,9 +91,9 @@ exports.saveRecipe = function(req, res){
 				ERROR_MESSAGE: '',
 				MT_TESTCASES_ID: 103,
 				CREATED_BY: 'aksha',
-				CREATED_DATE: new Date('May 18, 1991'),
+				CREATED_DATE: new Date(),
 				MODIFIED_BY: 'aksha',
-				MODIFIED_DATE: new Date('Juna 18, 1991'),
+				MODIFIED_DATE: new Date(),
 				EXTRANET_FILE_NAME:'testing12'
 				});
 
@@ -141,25 +141,26 @@ exports.saveRecipe = function(req, res){
 		STEP_DETAILS:'testcase12',	
 		FRONTEND: recipes[i].frontEnd,
 		BACKEND:	recipes[i].backEnd,
-		AUDIO_ALERT: recipes[i].complaint,
-		BATTERY:	recipes[i].audioAlert,
-		BLUETOOTH:	recipes[i].battery,	
-		CAMERA:	recipes[i].bluetooth,
-		CHARGING:	recipes[i].camera,
-		DISPLAY_KEYBORED:	recipes[i].charging,
-		MEMORY_CARD:	recipes[i].displayKeypad,
-		POWER_ON_OFF:	recipes[i].memoryCard,
-		SIM_CARD:	recipes[i].powerOnOf,
-		WIFI:recipes[i].simCard,
-		NO_COMPLAINT:recipes[i].wifi
+		AUDIO_ALERT: recipes[i].audioAlert,
+		BATTERY:	recipes[i].battery,
+		BLUETOOTH:	recipes[i].bluetooth,	
+		CAMERA:	recipes[i].camera,
+		CHARGING:	recipes[i].charging,
+		DISPLAY_KEYBORED:	recipes[i].displayKeypad,
+		MEMORY_CARD:	recipes[i].memoryCard,
+		POWER_ON_OFF:	recipes[i].powerOnOf,
+		SIM_CARD:	recipes[i].simCard,
+		WIFI:recipes[i].wifi,
+		NO_COMPLAINT:recipes[i].complaint
 		});
 
 	stepsdoe.save(function (err) {if (err) console.log ('Error on save!')});
 	
 	
 	}
-	
+	res.render('index');
 	res.end();
+	
 
 	
 };

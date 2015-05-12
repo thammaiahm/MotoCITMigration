@@ -14,61 +14,48 @@ exports.showhomepage = function(req, res) {
 };
 
 exports.uploadtestcase = function(req, res) {
-	mongoose.connect('mongodb://localhost/RecipeGenerationDB', function (err, res) {
-		if (err) { 
-		console.log ('ERROR connecting to: ' + 'mongodb://localhost/RecipeGenerationDB' + '. ' + err);
-		} else {
-		console.log ('Succeeded connected to: ' + 'mongodb://localhost/RecipeGenerationDB');
+//update to testcase- Status
+	
+	var form = req.form;
+	// console.log(req.files.upfilename);
+	console.log(req.files.upload.name);
+	console.log(req.files.upload.path);
+	var fname = req.files.upload.name;
+
+	fs.readFile(req.files.upload.path, 'utf8', function(err, data) {
+		if (err) {
+			return console.log(err);
 		}
-		});
+		console.log(data);
 		
-		var form = req.form;
-		 console.log(form);
-		console.log(req.files.upload.name);
-		console.log(req.files.upload.path);
-		var fname = req.files.upload.name;
-
-		fs.readFile(req.files.upload.path, 'utf8', function(err, data) {
-			if (err) {
-				return console.log(err);
-			}
-			console.log(data);
-			
-			
-			var SchemaUser = new Schema({
-				ID:	Number,
-				NAME:	String,
-				STATUS:	Number,	
-				CREATED_BY:	String,
-				MODIFIED_BY:	String,	
-				CREATED_DATE:	Date,
-				MODIFIED_DATE:	Date,	
-				TESTCASE_NAME:	String
-					});
-
-			var RdUser = mongoose.model('mt_testcases', SchemaUser);
-			var i=104;
-			var testdoe = new RdUser({
-				ID : i,
+	MongoClient.connect("mongodb://localhost/RecipeGenerationDB", function(err, db) {
+		if(err) { return console.dir(err); }
+		var collections = db.collection('mt_testcases');
+		collections.update({STATUS:1}, {$set:{STATUS:2}}, {w:1, multi: true}, function(err, result) {});
+		collections.update({STATUS:0}, {$set:{STATUS:1}}, {w:1, multi: true}, function(err, result) {});
+	
+		//insert to testcases
+		var testcasedocument = {
+				ID : 103,
 				NAME : fname,
 				STATUS : 0,
 				CREATED_BY : 'aksha',
 				MODIFIED_BY : 'aksha',
-				CREATED_DATE : new Date('Apr 18, 1991'),
-				MODIFIED_DATE : new Date('May 04, 1915'),
+				CREATED_DATE : new Date(),
+				MODIFIED_DATE : new Date(),
 				TESTCASE_NAME : data
-			});
-			i++;
-
-			//Saving it to the database.  
-			testdoe.save(function(err) {
-				if (err)
-					console.log('Error on save!')
-			});
-
-			res.render('index');
+			};
+		collections.insert(testcasedocument, {w: 1}, function(err, records){
+		 // console.log("Record added as "+records[0]._id);
+	
+		collections.save(testcasedocument, {w:1}, function(err, records){});
 		
+		});
+
 	});
+	});
+	
+	res.render('index');	
 	};
 
 
