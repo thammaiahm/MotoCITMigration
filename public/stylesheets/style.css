@@ -1,8 +1,27 @@
 body {
-  padding: 50px;
+	margin: 0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
+}
+
+.motoblue {
+	background: #03f;
+	}
+.topnav {
+	color:  #999;
+	background: #333;
+}
+.menu {
+	width: 280px;
+	margin-top: 10px;
+}
+
+.container{
+	width: 360px;
+	position: absolute;
+	top: 5em;
+	left: 25em;
 }

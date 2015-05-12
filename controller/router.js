@@ -5,8 +5,8 @@ module.exports = function (app) {
 	
 	app.get('/loadtestcase', read.showhomepage);
 	app.post('/uploadtestcase', read.uploadtestcase);
-	app.get('/home',RecipeGeneration.showRecipePage);
+	app.get('/RecipeGeneration',RecipeGeneration.showRecipePage);
 	app.get('/saveRecipe', RecipeGeneration.saveRecipe);
-	app.post('/home',RecipeGeneration.loadTestcases);
+	app.post('/RESTWSRecipeGeneration',RecipeGeneration.loadTestcases);
 		
 };

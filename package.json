@@ -13,11 +13,11 @@
 	    "multiparty": "*",
 	    "fs": "*",
 	    "util": "*",
-	    "multipart": "*",
-	    "node-uuid": "*",
-	    "fileupload": "*",
 	    "mongoose": "*",
 	    "http": "*",
-	    "mongodb":"*"
-	  }
+	    "mongodb":"*",
+	    "multipart": "*",
+	    "node-uuid": "*",
+	    "fileupload": "*"
+	    }
 	}
