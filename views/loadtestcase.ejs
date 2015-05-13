@@ -4,17 +4,16 @@
 <meta charset="ISO-8859-1">
 <title>Loading Test Case</title>
 <link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
-</head>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
 <script>
-$("#Success").click(function(){
-    	$('#tableBodyID').append('<p>File loaded successfully</p>')
-    });
-    
- $("#resetbtn").click(function(){
-    	location.reload();
-    	//test
-    });   
+$(document).ready(function(){
+  $("#resetbtn").click(function(){
+    	$('#up').val('');
+    }); 
+    });  
 </script>
+</head>
+
 <body>
 <% include header.html %> 
 
@@ -31,7 +30,7 @@ $("#Success").click(function(){
 <h2><img src = "bullet.gif" alt = "Bullet Image"> Load Supported Test Cases</h2></p>
 
 <p> <img src = "bullet.gif" alt = "Bullet Image"> Select the text file (**) :
-<input type="file" name="upload">
+<input type="file" name="upload" id="up">
 </p>
 
 <br></br>
@@ -39,7 +38,7 @@ $("#Success").click(function(){
 
 <p>
 
-<input type="submit" id="Success">
+<input type="submit" >
    <input type="button" name="Reset" value="Reset" id="resetbtn">
 </p>
 	<br>

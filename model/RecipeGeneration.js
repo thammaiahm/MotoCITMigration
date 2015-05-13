@@ -205,7 +205,8 @@ exports.saveRecipe = function(req, res){
 	
 	}
 	})	
-	res.render('RecipeGeneration',{'title':'Successfully saved Recipe!!!'})
+	res.render('index');
+	res.end();
 	
 	
 	
