@@ -20,7 +20,7 @@ $( document ).on( "click", ".del", function( event )
 	});
 	
     $("#LoadButton").click(function(){
-    	alert($("#selectedRecipeXmlId option:selected" ).val());
+    	//alert($("#selectedRecipeXmlId option:selected" ).val());
     	$id=$("#selectedRecipeXmlId option:selected" ).val()
     	
         $.post("/RESTWSRecipeGeneration?id="+$id,function(data){
@@ -54,9 +54,9 @@ $( document ).on( "click", ".del", function( event )
  		
   		} 
   		
-  		for(i=0; i<data.length;i++)
-  		{
-  		
+  	//	for(i=0; i<data.length;i++)
+  	//	{
+  		var i=0;
   			$('#tableId > tbody  > tr').each(function()
   			{
   			$td=0
@@ -155,10 +155,10 @@ $( document ).on( "click", ".del", function( event )
   			}
 			$td++	
 			});
-  			
+  			i++;
   			});
   		
-  		}//End of for
+  		//}//End of for
   		
   	   });//End of post
     });//End of button click
@@ -391,7 +391,7 @@ function createRecipeList()
 	$tClengthID=$i;	
 	$str = $str + "]"
 	
-	alert($str);
+	//alert($str);
 	$generatedJsonString = "<input type='hidden' name='recipeString' id='recipeString' value='" + $str + "' />";
 	
 	$("#generatedRecipeListContainer").html($generatedJsonString);
